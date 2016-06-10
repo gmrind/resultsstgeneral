@@ -1,0 +1,57 @@
+<p id="notice"><%= notice %></p>
+
+<h3>Search Online Result of S.S.T (General) Male (B-17)</h3>
+<br>
+
+<%= form_tag results_path, :method => 'get' do %>
+  <p>
+    <%= text_field_tag :search, params[:search], placeholder: "Search by Name Only", class: "search-field" %>
+    <%= submit_tag "Search", :name => nil, class: "btn-search" %>
+  </p>
+<% end %>
+
+<br><br>
+
+<% if params[:search].present? %>
+ <% if @results.present? %>
+<table>
+  <thead>
+    <tr>
+      <th>S.No</th>
+      <th>Roll Number</th>
+      <th>Name</th>
+      <th>Father Name</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @results.each do |result| %>
+      <tr>
+        <td><%= result.id %></td>
+        <td><%= result.rno %></td>
+        <td><%= result.cname %></td>
+        <td><%= result.fname %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+  <% else %>
+<p class="no-result"> 
+  There is no such result found with <b class="params-search"><%= params[:search] %></b>...!!!
+</p>
+  <% end %>
+<% else %>
+<p>
+  There is no result searched yet...
+</p>
+<% end %>
+<br><br>
+<% if :file.present? %>
+<% else %>
+<%= form_tag import_results_path, multipart: true do %>
+  <%= file_field_tag :file %>
+  <%= submit_tag "Import" %>
+<% end %>
+<br><br>
+<%= link_to 'New Result', new_result_path %>
+<% end -%>

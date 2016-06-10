@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Rno:</strong>
+  <%= @result.rno %>
+</p>
+
+<p>
+  <strong>Cname:</strong>
+  <%= @result.cname %>
+</p>
+
+<p>
+  <strong>Fname:</strong>
+  <%= @result.fname %>
+</p>
+
+<%= link_to 'Edit', edit_result_path(@result) %> |
+<%= link_to 'Back', results_path %>
